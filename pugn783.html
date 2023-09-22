@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="pugn783.css">
+    
+    <title>Chess</title>
+    <link rel="icon" href="https://cws.auckland.ac.nz/gas/api/FavIcon">
+</head>
+
+
+<body>
+    <div class="topnav">
+        <div>
+            <img alt="logo" src="https://cws.auckland.ac.nz/gas/api/Logo" width = 100/>
+            <a id = "logout" onclick="logout();">Log out</a>
+            <a id = "game" onclick="showGamePage();">♚ Game of Chess</a>
+            <a id = "guest" onclick="showGuestPage();">📖 Guest Book</a>
+            <a id = "login" onclick="showLoginPage();">👩 User Login</a>
+            <a id = "register" onclick="showRegisterPage();" >✍ User Registration</a>
+            <a id = "shop" onclick="showShopPage();">🛒 Academy Shop</a>
+            <a id = "home" onclick="showHomePage();">🏠 Home</a>
+        </div>
+        <div id = "homepage"><p class = "name">The Game Academy</p></div>
+        <div id = "shoppage"><p class = "name">The Game Shop</p></div>
+        <div id = "registerpage"><p class = "name">Register</p></div>
+        <div id = "loginpage"><p class = "name">Login</p></div>
+        <div id = "guestpage"><p class = "name">Guest Book</p></div>
+        <div id = "gamepage"><p class = "name">The Game of Chess</p></div>
+    </div>
+
+    <div id = "home-content">
+        <h1 id = "homepage-header"></h1>
+        <img class = "home-img" alt="bKing" src="https://cws.auckland.ac.nz/gas/images/Kb.svg"/>
+    </div>
+
+    <div id = "shop-content">
+        <div class="search-form" role="search">
+            <input type="text" id="search-bar" name="search" placeholder="Search...">
+        </div>
+        <div id = "items-container"></div>
+    </div>
+
+    <div id = "register-form">
+        <div class="form">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" id="uname-register" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="psw-register" required>
+        
+            <button type="submit" onclick="register();">Submit</button>
+            <p id="notification" style="display: none"></p>
+        </div>
+    </div>
+
+    <div id = "login-form">
+        <div class="form">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" id="uname-login" required>
+        
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" id="psw-login" required>
+        
+            <button type="submit" onclick="login(event);">Submit</button>
+        </div>
+    </div>
+
+    <div id = "comment-form">
+    </div>
+
+    <div id = "chessboard">
+        <h1>Chess</h1>
+        <ul>
+            <div class="divv" id="row9">
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b000">a</li>
+                <li class="box" id="b000">b</li>
+                <li class="box" id="b000">c</li>
+                <li class="box" id="b000">d</li>
+                <li class="box" id="b000">e</li>
+                <li class="box" id="b000">f</li>
+                <li class="box" id="b000">g</li>
+                <li class="box" id="b000">h</li>
+                <li class="box" id="b000" ondrop="bin_drop(event)", ondragover="mydragover(event)"><img class = "img" alt="Bin" src="https://cws.auckland.ac.nz/gas/images/Bin.svg" width = 50 /></li>
+            </div>
+            <div class="divv" id="row8">
+                <li class="box" id="b000">8</li>
+                <li class="box" id="b801" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Rb1" alt="bBrook" src="https://cws.auckland.ac.nz/gas/images/Rb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b802" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Nb1" alt="bKnight" src="https://cws.auckland.ac.nz/gas/images/Nb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b803" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Bb1" alt="bBishop" src="https://cws.auckland.ac.nz/gas/images/Bb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b804" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb"alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b805" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Kb" alt="bKing" src="https://cws.auckland.ac.nz/gas/images/Kb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b806" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Bb2" alt="bBishop" src="https://cws.auckland.ac.nz/gas/images/Bb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b807" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Nb2" alt="bKnight" src="https://cws.auckland.ac.nz/gas/images/Nb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b808" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Rb2" alt="bBrook" src="https://cws.auckland.ac.nz/gas/images/Rb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb8"alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+            <div class="divv" id="row7">
+                <li class="box" id="b000">7</li>
+                <li class="box" id="b701" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb1" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b702" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb2" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b703" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb3" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b704" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb4" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b705" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb5" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b706" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb6" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b707" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb7" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b708" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pb8" alt="bPawn" src="https://cws.auckland.ac.nz/gas/images/Pb.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb7" alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+            <div class="divv" id="row6">
+                <li class="box" id="b000">6</li>
+                <li class="box" id="b601" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b602" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b603" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b604" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b605" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b606" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b607" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b608" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b000"><img class = "img" id="Qb6" alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+            <div class="divv" id="row5">
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)">5</li>
+                <li class="box" id="b501" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b502" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b503" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b504" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b505" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b506" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b507" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b508" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb5" alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qb.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+            <div class="divv" id="row4">
+                <li class="box" id="b000">4</li>
+                <li class="box" id="b401" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b402" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b403" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b404" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b405" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b406" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b407" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b408" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb4" alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+            <div class="divv" id="row3">
+                <li class="box" id="b000">3</li>
+                <li class="box" id="b301" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b302" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b303" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b304" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b305" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b306" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b307" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b308" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb3" alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+
+            <div class="divv" id="row2">
+                <li class="box" id="b000">2</li>
+                <li class="box Wpawn" id="b201" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw1" alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box Wpawn" id="b202" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw2"alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box Wpawn" id="b203" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw3" alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box Wpawn" id="b204" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw4" alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box Wpawn" id="b205" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw5" alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box Wpawn" id="b206" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw6" alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box Wpawn" id="b207" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw7" alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box Wpawn" id="b208" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Pw8" alt="wPawn" src="https://cws.auckland.ac.nz/gas/images/Pw.svg " width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb2" alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+            <div class="divv" id="row1">
+                <li class="box" id="b000">1</li>
+                <li class="box" id="b101" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Rw1" alt="wRook" src="https://cws.auckland.ac.nz/gas/images/Rw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b102" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Nw1" alt="wKnight" src="https://cws.auckland.ac.nz/gas/images/Nw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b103" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Bw1" alt="wBishop" src="https://cws.auckland.ac.nz/gas/images/Bw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b104" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qw1" alt="wQueen" src="https://cws.auckland.ac.nz/gas/images/Qw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b105" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Kw1" alt="wKing" src="https://cws.auckland.ac.nz/gas/images/Kw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b106" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Bw2" alt="wBishop" src="https://cws.auckland.ac.nz/gas/images/Bw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b107" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Nw2" alt="wKnight" src="https://cws.auckland.ac.nz/gas/images/Nw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b108" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Rw2" alt="wRook" src="https://cws.auckland.ac.nz/gas/images/Rw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"><img class = "img" id="Qb1" alt="bQueen" src="https://cws.auckland.ac.nz/gas/images/Qw.svg" width = 50 ondragstart="mydragstart(event)"/></li>
+            </div>
+            <div class="divv" id="row0">
+                <li class="box" id="b000" ondrop="bin_drop(event)", ondragover="mydragover(event)"><img class = "img" alt="Bin" src="https://cws.auckland.ac.nz/gas/images/Bin.svg" width = 50/></li>
+                <li class="box" id="b000">a</li>
+                <li class="box" id="b000">b</li>
+                <li class="box" id="b000">c</li>
+                <li class="box" id="b000">d</li>
+                <li class="box" id="b000">e</li>
+                <li class="box" id="b000">f</li>
+                <li class="box" id="b000">g</li>
+                <li class="box" id="b000">h</li>
+                <li class="box" id="b000" ondrop="mydrop(event)", ondragover="mydragover(event)"></li>
+            </div>
+
+        </ul>
+        <div class="board-control">
+            <button id="try-game" type="button" onclick="try_game()" >Try Game</button>
+            <button id="quit-game" type="button" onclick="quit_game()" style="display: none;">Quit Game</button>
+            <button id="get-their-move" type="button" onclick="get_their_move()" style="display: none;">Get Their Move</button>
+            <button id="send-my-move" type="button" onclick="send_my_move()" style="display: none;">Send My Move</button>
+        </div>
+        <div id="pair-info"></div>
+    </div>
+    
+    <script src="pugn783.js"></script>
+</body>
+
+<script>
+
+
+   
+</script>
+
+</html>
